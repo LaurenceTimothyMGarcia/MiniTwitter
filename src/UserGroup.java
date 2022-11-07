@@ -1,4 +1,5 @@
 //each group must have unique id, contain any # of users, groups can hold other groups
+//Make this composite
 
 import java.util.*;
 
