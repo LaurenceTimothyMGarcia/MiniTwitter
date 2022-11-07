@@ -5,7 +5,7 @@
 
 /**
  *
- * @author Laurence
+ * Observer Pattern
  */
 public class UserView extends javax.swing.JFrame {
 

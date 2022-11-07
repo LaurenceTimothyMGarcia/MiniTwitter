@@ -1,5 +1,6 @@
 //Users must have unique ID, list of followers, list of followings
 //news feed list containing list of twitter messsges
+//Visitor Pattern
 
 import java.util.*;
 
