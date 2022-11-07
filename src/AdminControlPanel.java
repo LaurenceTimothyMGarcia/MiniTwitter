@@ -7,12 +7,28 @@
  *
  * Must be singleton
  */
-public class AdminControlPanel extends javax.swing.JFrame {
+public class AdminControlPanel extends javax.swing.JFrame 
+{
+    /*
+     * Created singleton
+     */
+    private static AdminControlPanel instance = new AdminControlPanel();
+    
+    public static AdminControlPanel getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new AdminControlPanel();
+        }
+        
+        return instance;
+    }
 
     /**
      * Creates new form AdminControlPanel
      */
-    public AdminControlPanel() {
+    private AdminControlPanel() 
+    {
         initComponents();
     }
 
@@ -40,7 +56,6 @@ public class AdminControlPanel extends javax.swing.JFrame {
         groupID = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(854, 480));
 
         TreeView.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
