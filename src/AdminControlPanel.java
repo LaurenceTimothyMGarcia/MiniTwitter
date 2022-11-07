@@ -5,7 +5,7 @@
 
 /**
  *
- * @author Laurence
+ * Must be singleton
  */
 public class AdminControlPanel extends javax.swing.JFrame {
 
