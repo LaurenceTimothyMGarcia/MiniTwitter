@@ -10,6 +10,7 @@ public class UserGroup
     //Holds group of users
     private Set<Integer> groupUsers = new HashSet<Integer>();
 
+    private String groupName;
 
     //Accessor Methods
     public void setGroupID(int id)
@@ -30,5 +31,15 @@ public class UserGroup
     public Set<Integer> getGroup()
     {
         return groupUsers;
+    }
+    
+    public void setGroupName(String name)
+    {
+        groupName = name;
+    }
+    
+    public String getGroupName()
+    {
+        return groupName;
     }
 }
