@@ -52,11 +52,6 @@ public class AdminControlPanel extends javax.swing.JFrame
     {
         initComponents();
     }
-    
-    private void addUser(CompositeUser user)
-    {
-        TreeView.add(user.getName(), user);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,10 +79,11 @@ public class AdminControlPanel extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TreeView.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "TreeView", "Root", "- name", "- name", "- name", "- Group1", "    - name", "    - name", "    - name" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        TreeView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(TreeView);
 
         addUser.setText("Add User");
