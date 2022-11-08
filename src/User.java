@@ -4,7 +4,7 @@
 
 import java.util.*;
 
-public class User 
+public class User implements CompositeUser
 {
     //Unique user id
     private int userID;
@@ -19,12 +19,12 @@ public class User
     private String message;
 
     //Accessor methods
-    public void setUserID(int id)
+    @Override public void setID(int id)
     {
         userID = id;
     }
 
-    public int getUserID()
+    @Override public int getID()
     {
         return userID;
     }
@@ -49,12 +49,12 @@ public class User
         return following;
     }
 
-    public void setUsername(String name)
+    @Override public void setName(String name)
     {
         username = name;
     }
 
-    public String getUsername()
+    @Override public String getName()
     {
         return username;
     }

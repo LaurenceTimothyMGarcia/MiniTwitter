@@ -3,7 +3,7 @@
 
 import java.util.*;
 
-public class UserGroup 
+public class UserGroup implements CompositeUser
 {
     //Unique group id
     private int groupID;
@@ -14,12 +14,12 @@ public class UserGroup
     private String groupName;
 
     //Accessor Methods
-    public void setGroupID(int id)
+    @Override public void setID(int id)
     {
         groupID = id;
     }
 
-    public int getGroupID()
+    @Override public int getID()
     {
         return groupID;
     }
@@ -34,12 +34,12 @@ public class UserGroup
         return groupUsers;
     }
     
-    public void setGroupName(String name)
+    @Override public void setName(String name)
     {
         groupName = name;
     }
     
-    public String getGroupName()
+    @Override public String getName()
     {
         return groupName;
     }
