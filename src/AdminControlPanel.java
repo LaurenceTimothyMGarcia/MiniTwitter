@@ -52,6 +52,11 @@ public class AdminControlPanel extends javax.swing.JFrame
     {
         initComponents();
     }
+    
+    private void addUser(CompositeUser user)
+    {
+        TreeView.add(user.getName(), user);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
