@@ -6,50 +6,36 @@ import java.util.*;
 public class UserGroup implements CompositeUser
 {
     //Unique group id
-    private int groupID;
-    private String groupName;
+    private String groupID;
 
     //Holds group of users
-    private Set<Integer> groupUsers = new HashSet<Integer>();
+    private Set<User> groupUsers = new HashSet<User>();
     
-    public UserGroup(int id, String name)
+    public UserGroup(String id)
     {
         groupID = id;
-        groupName = name;
     }
     
     //Accessor Methods
     @Override 
-    public void setID(int id)
+    public void setID(String id)
     {
         groupID = id;
     }
 
     @Override 
-    public int getID()
+    public String getID()
     {
         return groupID;
     }
 
-    public void addUserToGroup(int userID)
+    public void addUserToGroup(User userID)
     {
         groupUsers.add(userID);
     }
 
-    public Set<Integer> getGroup()
+    public Set<User> getGroup()
     {
         return groupUsers;
-    }
-    
-    @Override 
-    public void setName(String name)
-    {
-        groupName = name;
-    }
-    
-    @Override 
-    public String getName()
-    {
-        return groupName;
     }
 }

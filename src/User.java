@@ -7,8 +7,7 @@ import java.util.*;
 public class User implements CompositeUser
 {
     //Unique user id
-    private int userID;
-    private String username;
+    private String userID;
     private String message;
 
     //List of followers
@@ -17,21 +16,20 @@ public class User implements CompositeUser
     //List of following
     private Set<Integer> following = new HashSet<Integer>();
     
-    public User(int id, String name)
+    public User(String id)
     {
         userID = id;
-        username = name;
     }
 
     //Accessor methods
     @Override 
-    public void setID(int id)
+    public void setID(String id)
     {
         userID = id;
     }
 
     @Override 
-    public int getID()
+    public String getID()
     {
         return userID;
     }
@@ -54,18 +52,6 @@ public class User implements CompositeUser
     public Set<Integer> getFollowing()
     {
         return following;
-    }
-
-    @Override 
-    public void setName(String name)
-    {
-        username = name;
-    }
-
-    @Override 
-    public String getName()
-    {
-        return username;
     }
 
     public void setMessage(String mess)

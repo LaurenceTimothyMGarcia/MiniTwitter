@@ -9,9 +9,6 @@
  */
 public interface CompositeUser 
 {
-    public void setName(String name);
-    public String getName();
-    
-    public void setID(int id);
-    public int getID();
+    public void setID(String id);
+    public String getID();
 }
