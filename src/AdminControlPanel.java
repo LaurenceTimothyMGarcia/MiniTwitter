@@ -16,8 +16,8 @@ public class AdminControlPanel extends javax.swing.JFrame
      * Created singleton
      */
     private static AdminControlPanel instance = new AdminControlPanel();
-    private static HashMap<Integer, User> allUsers = null;
-    private static HashMap<Integer, CompositeUser> allUserGroups = null;
+    private static HashMap<String, User> allUsers = null;
+    private static HashMap<String, CompositeUser> allUserGroups = null;
     private static UserGroup root = null;
     
     public static AdminControlPanel getInstance()
@@ -29,18 +29,24 @@ public class AdminControlPanel extends javax.swing.JFrame
         
         if (allUsers == null)
         {
-            allUsers = new HashMap<Integer, User>();
+            allUsers = new HashMap<String, User>();
         }
         
         if (allUserGroups == null)
         {
-            allUserGroups = new HashMap<Integer, CompositeUser>();
+            allUserGroups = new HashMap<String, CompositeUser>();
         }
         
         if (root == null)
         {
             root = new UserGroup("Root");
         }
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AdminControlPanel().setVisible(true);
+            }
+        });
         
         return instance;
     }
@@ -51,6 +57,11 @@ public class AdminControlPanel extends javax.swing.JFrame
     private AdminControlPanel() 
     {
         initComponents();
+    }
+    
+    private void UpdateTreeView(CompositeUser user)
+    {
+        
     }
 
     /**
@@ -84,6 +95,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             public String getElementAt(int i) { return strings[i]; }
         });
         TreeView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TreeView.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(TreeView);
 
         addUser.setText("Add User");
