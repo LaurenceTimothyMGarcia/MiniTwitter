@@ -8,23 +8,30 @@ public class User implements CompositeUser
 {
     //Unique user id
     private int userID;
+    private String username;
+    private String message;
 
     //List of followers
     private Set<Integer> followers = new HashSet<Integer>();
 
     //List of following
     private Set<Integer> following = new HashSet<Integer>();
-
-    private String username;
-    private String message;
+    
+    public User(int id, String name)
+    {
+        userID = id;
+        username = name;
+    }
 
     //Accessor methods
-    @Override public void setID(int id)
+    @Override 
+    public void setID(int id)
     {
         userID = id;
     }
 
-    @Override public int getID()
+    @Override 
+    public int getID()
     {
         return userID;
     }
@@ -49,12 +56,14 @@ public class User implements CompositeUser
         return following;
     }
 
-    @Override public void setName(String name)
+    @Override 
+    public void setName(String name)
     {
         username = name;
     }
 
-    @Override public String getName()
+    @Override 
+    public String getName()
     {
         return username;
     }

@@ -7,18 +7,39 @@
  *
  * Must be singleton
  */
+
+import java.util.*;
+
 public class AdminControlPanel extends javax.swing.JFrame 
 {
     /*
      * Created singleton
      */
     private static AdminControlPanel instance = new AdminControlPanel();
+    private static HashMap<Integer, User> allUsers = null;
+    private static HashMap<Integer, CompositeUser> allUserGroups = null;
+    private static UserGroup root = null;
     
     public static AdminControlPanel getInstance()
     {
         if (instance == null)
         {
             instance = new AdminControlPanel();
+        }
+        
+        if (allUsers == null)
+        {
+            allUsers = new HashMap<Integer, User>();
+        }
+        
+        if (allUserGroups == null)
+        {
+            allUserGroups = new HashMap<Integer, CompositeUser>();
+        }
+        
+        if (root == null)
+        {
+            root = new UserGroup(0000, "Root");
         }
         
         return instance;
