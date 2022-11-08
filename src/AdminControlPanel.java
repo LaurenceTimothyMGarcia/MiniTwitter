@@ -39,7 +39,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         
         if (root == null)
         {
-            root = new UserGroup(0000, "Root");
+            root = new UserGroup("Root");
         }
         
         return instance;

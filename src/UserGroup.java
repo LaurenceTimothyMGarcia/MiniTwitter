@@ -9,11 +9,12 @@ public class UserGroup implements CompositeUser
     private String groupID;
 
     //Holds group of users
-    private Set<User> groupUsers = new HashSet<User>();
+    private Set<CompositeUser> groupUsers;
     
     public UserGroup(String id)
     {
         groupID = id;
+        groupUsers = new HashSet<CompositeUser>();
     }
     
     //Accessor Methods
@@ -34,7 +35,7 @@ public class UserGroup implements CompositeUser
         groupUsers.add(userID);
     }
 
-    public Set<User> getGroup()
+    public Set<CompositeUser> getGroup()
     {
         return groupUsers;
     }

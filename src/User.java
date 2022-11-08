@@ -8,17 +8,23 @@ public class User implements CompositeUser
 {
     //Unique user id
     private String userID;
-    private String message;
 
     //List of followers
-    private Set<Integer> followers = new HashSet<Integer>();
+    private Set<Integer> followers;
 
     //List of following
-    private Set<Integer> following = new HashSet<Integer>();
+    private Set<Integer> following;
+    
+    private List<String> message;
+    private List<Message> newsFeed;
     
     public User(String id)
     {
-        userID = id;
+        this.userID = id;
+        this.followers = new HashSet<Integer>();
+        this.following = new HashSet<Integer>();
+        this.message = new ArrayList<String>();
+        this.newsFeed = new ArrayList<Message>();
     }
 
     //Accessor methods
@@ -54,13 +60,13 @@ public class User implements CompositeUser
         return following;
     }
 
-    public void setMessage(String mess)
+    public void addMessage(String mess)
     {
-        message = mess;
+        message.add(mess);
     }
 
-    public String getMessage()
+    public String getMessage(int pos)
     {
-        return message;
+        return message.get(pos);
     }
 }
