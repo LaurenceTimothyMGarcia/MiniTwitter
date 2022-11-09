@@ -42,12 +42,6 @@ public class AdminControlPanel extends javax.swing.JFrame
             root = new UserGroup("Root");
         }
         
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminControlPanel().setVisible(true);
-            }
-        });
-        
         return instance;
     }
 
@@ -73,8 +67,6 @@ public class AdminControlPanel extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TreeView = new javax.swing.JList<>();
         addUser = new javax.swing.JButton();
         addGroup = new javax.swing.JButton();
         openUserView = new javax.swing.JButton();
@@ -86,17 +78,10 @@ public class AdminControlPanel extends javax.swing.JFrame
         userID = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         groupID = new javax.swing.JTextArea();
+        TreeView = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        TreeView.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "TreeView", "Root", "- name", "- name", "- name", "- Group1", "    - name", "    - name", "    - name" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        TreeView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        TreeView.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(TreeView);
 
         addUser.setText("Add User");
 
@@ -128,14 +113,16 @@ public class AdminControlPanel extends javax.swing.JFrame
         groupID.setText("Group ID");
         jScrollPane3.setViewportView(groupID);
 
+        TreeView.setViewportView(jTree1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TreeView, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(openUserView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -164,6 +151,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TreeView)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addUser, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
@@ -181,8 +169,7 @@ public class AdminControlPanel extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(showMessageTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(showPosPercent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane1))
+                            .addComponent(showPosPercent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -225,13 +212,13 @@ public class AdminControlPanel extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> TreeView;
+    private javax.swing.JScrollPane TreeView;
     private javax.swing.JButton addGroup;
     private javax.swing.JButton addUser;
     private javax.swing.JTextArea groupID;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTree jTree1;
     private javax.swing.JButton openUserView;
     private javax.swing.JButton showGroupTotal;
     private javax.swing.JButton showMessageTotal;
