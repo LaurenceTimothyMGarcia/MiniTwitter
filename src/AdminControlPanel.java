@@ -58,29 +58,45 @@ public class AdminControlPanel extends javax.swing.JFrame
     
     private static DefaultMutableTreeNode rootView = new DefaultMutableTreeNode(root);
     
-    private void LoadTree()
+    public void LoadTree()
     {
-        for(int i = 0; i < allUserGroups.size(); i++)
-        {
-            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(allUserGroups.get(i));
-        }
+        //Test Group - Need to figure out where to run the code
+        User Enzo = new User("Enzo");
+        User Larry = new User("Larry");
+        
+        UserGroup study = new UserGroup("Study Group");
+        
+        study.addUserToGroup(Larry);
+        study.addUserToGroup(Enzo);
+        
+        DefaultMutableTreeNode studyGroup = new DefaultMutableTreeNode(study);
+        
+        AddGroup(rootView, study);
+        
+        //Adding all groups to tree
+        tree = (DefaultTreeModel) jTree1.getModel();
+        tree.setRoot(rootView);
+        jTree1.setModel(tree);
     }
     
-    private void AddUser(DefaultMutableTreeNode rootNode, CompositeUser u)
+    public void AddUser(DefaultMutableTreeNode rootNode, CompositeUser u)
     {
         rootNode.add(new DefaultMutableTreeNode(u));
     }
     
-    private void AddGroup(DefaultMutableTreeNode parNode, UserGroup group)
+    //Adds a user group to the tree
+    public void AddGroup(DefaultMutableTreeNode parNode, UserGroup group)
     {
         DefaultMutableTreeNode newGroup = new DefaultMutableTreeNode(group);
         
         for (int i = 0; i < group.getGroup().size(); i++)
         {
+            //Checks if its user or user group
             if (group.getGroup().get(i) instanceof User user)
             {
                 AddUser(newGroup, user);
             }
+            //If user group then recursively call until only users input
             else if (group.getGroup().get(i) instanceof UserGroup userGroup)
             {
                 AddGroup(newGroup, userGroup);
