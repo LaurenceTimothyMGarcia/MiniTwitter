@@ -77,13 +77,13 @@ public class AdminControlPanel extends javax.swing.JFrame
         
         for (int i = 0; i < group.getGroup().size(); i++)
         {
-            if (group.getGroup().get(i) instanceof User)
+            if (group.getGroup().get(i) instanceof User user)
             {
-                instance.AddUser(newGroup, group.getGroup().get(i));
+                AddUser(newGroup, user);
             }
-            else if (group.getGroup().get(i) instanceof UserGroup)
+            else if (group.getGroup().get(i) instanceof UserGroup userGroup)
             {
-                AddGroup(newGroup, group.getGroup().get(i));
+                AddGroup(newGroup, userGroup);
             }
         }
         
