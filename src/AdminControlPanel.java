@@ -60,6 +60,8 @@ public class AdminControlPanel extends javax.swing.JFrame
     
     public void LoadTree()
     {
+        System.out.println("Run");
+        
         //Test Group - Need to figure out where to run the code
         User Enzo = new User("Enzo");
         User Larry = new User("Larry");
@@ -94,11 +96,13 @@ public class AdminControlPanel extends javax.swing.JFrame
             //Checks if its user or user group
             if (group.getGroup().get(i) instanceof User user)
             {
+                System.out.println("Got User");
                 AddUser(newGroup, user);
             }
             //If user group then recursively call until only users input
             else if (group.getGroup().get(i) instanceof UserGroup userGroup)
             {
+                System.out.println("Got User Group");
                 AddGroup(newGroup, userGroup);
             }
         }
@@ -256,6 +260,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                instance.LoadTree();
                 new AdminControlPanel().setVisible(true);
             }
         });
