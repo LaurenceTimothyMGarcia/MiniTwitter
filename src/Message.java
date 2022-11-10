@@ -29,6 +29,8 @@ public class Message
         {
             String tweet = allTweets.get(i);
             
+            tweet.toLowerCase();
+            
             for(int j = 0; j < positiveWords.length; j++)
             {
                 if (tweet.contains(positiveWords[j]))
