@@ -17,10 +17,10 @@ public class AdminControlPanel extends javax.swing.JFrame
     /*
      * Created singleton
      */
-    private static AdminControlPanel instance = new AdminControlPanel();
-    private static ArrayList<User> allUsers = null;
-    private static ArrayList<CompositeUser> allUserGroups = null;
-    private static UserGroup root = null;
+    private static AdminControlPanel instance = null;
+    private static ArrayList<User> allUsers = new ArrayList<User>();
+    private static ArrayList<UserGroup> allUserGroups = new ArrayList<UserGroup>();;
+    private static UserGroup root = new UserGroup("Root");
     private static DefaultTreeModel tree = null;
     
     public static AdminControlPanel getInstance()
@@ -30,20 +30,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             instance = new AdminControlPanel();
         }
         
-        if (allUsers == null)
-        {
-            allUsers = new ArrayList<User>();
-        }
-        
-        if (allUserGroups == null)
-        {
-            allUserGroups = new ArrayList<CompositeUser>();
-        }
-        
-        if (root == null)
-        {
-            root = new UserGroup("Root");
-        }
+        instance.setVisible(true);
         
         return instance;
     }
@@ -63,22 +50,20 @@ public class AdminControlPanel extends javax.swing.JFrame
     private String addUserText;
     private UserGroup groupSelected;
     
+    private int userCount = 0;
+    private int groupCount = 0;
+    
     private void LoadTree()
     {
         System.out.println("Run");
+        System.out.println(root);
         
-        //Test Group - Need to figure out where to run the code
-        User Enzo = new User("Enzo");
-        User Larry = new User("Larry");
-        
-        UserGroup study = new UserGroup("Study Group");
-        
-        study.addUserToGroup(Larry);
-        study.addUserToGroup(Enzo);
-        
-        DefaultMutableTreeNode studyGroup = new DefaultMutableTreeNode(study);
-        
-        AddGroup(rootView, study);
+        root = new UserGroup("Root");
+        //Need to automate the loading of root
+        for (int i = 0; i < allUserGroups.size(); i++)
+        {
+            AddGroup(rootView, allUserGroups.get(i));
+        }
         
         //Adding all groups to tree
         tree = (DefaultTreeModel) rootTree.getModel();
@@ -148,6 +133,11 @@ public class AdminControlPanel extends javax.swing.JFrame
         });
 
         addGroup.setText("Add Group");
+        addGroup.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addGroupMouseClicked(evt);
+            }
+        });
 
         openUserView.setText("Open User View");
 
@@ -253,7 +243,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         
         //Getting last value you clicked
         rootView = (DefaultMutableTreeNode) rootTree.getSelectionPath().getLastPathComponent();
-        currentSelected = (CompositeUser) rootView.getUserObject(); //This goes from string to composite user, this isnt possible
+        currentSelected = (CompositeUser) rootView.getUserObject();
         
         //Selects an option, if user is selected, userview can be viewed
         //if group is selected, any user/group added will be under that group.
@@ -277,11 +267,36 @@ public class AdminControlPanel extends javax.swing.JFrame
         // TODO add your handling code here:
         System.out.println("Add User Button Pressed");
         
-        if (groupSelected != null && userID != null)
+        if (groupSelected != null)
         {
-            AddUser(rootView, new User(userID.getText()));
+            DefaultMutableTreeNode currGroup = new DefaultMutableTreeNode(groupSelected);
+            User newUser = new User(userID.getText());
+            
+            AddUser(currGroup, newUser);
+            groupSelected.addUserToGroup(newUser);
+            allUsers.add(newUser);
+            userCount++;
+            LoadTree();
         }
     }//GEN-LAST:event_addUserMouseClicked
+
+    //If add group from text area if button is pressed
+    private void addGroupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addGroupMouseClicked
+        
+        // TODO add your handling code here:
+        System.out.println("Add Group Button Pressed");
+        
+        if (groupSelected != null)
+        {
+            DefaultMutableTreeNode currGroup = new DefaultMutableTreeNode(groupSelected);
+            UserGroup newGroup = new UserGroup(groupID.getText());
+            
+            AddGroup(currGroup, newGroup);
+            allUserGroups.add(newGroup);
+            groupCount++;
+            LoadTree();
+        }
+    }//GEN-LAST:event_addGroupMouseClicked
 
     /**
      * @param args the command line arguments
@@ -313,7 +328,6 @@ public class AdminControlPanel extends javax.swing.JFrame
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                instance.LoadTree();
                 new AdminControlPanel().setVisible(true);
             }
         });

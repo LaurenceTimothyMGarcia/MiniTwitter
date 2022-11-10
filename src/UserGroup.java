@@ -40,6 +40,7 @@ public class UserGroup implements CompositeUser
         return groupUsers;
     }
     
+    //Used to allow method to read
     @Override
     public String toString()
     {

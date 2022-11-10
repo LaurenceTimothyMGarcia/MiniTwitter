@@ -70,6 +70,7 @@ public class User implements CompositeUser
         return message.get(pos);
     }
     
+    //Used to allow method to read name
     @Override
     public String toString()
     {
