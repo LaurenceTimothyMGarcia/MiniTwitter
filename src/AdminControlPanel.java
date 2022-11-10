@@ -268,6 +268,8 @@ public class AdminControlPanel extends javax.swing.JFrame
             DefaultTreeModel model = (DefaultTreeModel) rootTree.getModel();
             
             model.reload();
+            
+            System.out.println("User HashMap: " + listUser.toString());
         }
     }//GEN-LAST:event_addUserMouseClicked
 
@@ -283,7 +285,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             UserGroup newGroup = new UserGroup(groupID.getText());
             
             DefaultMutableTreeNode currNode = (DefaultMutableTreeNode) rootTree.getSelectionPath().getLastPathComponent();
-            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(groupID);
+            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(newGroup);
             
             currNode.add(newNode);
             listGroup.put(newGroup.getID(), newGroup);
@@ -295,20 +297,6 @@ public class AdminControlPanel extends javax.swing.JFrame
             
             System.out.println("Group HashMap: " + listGroup.toString());
         }
-        
-        /*System.out.println("Add Group Button Pressed");
-        
-        if (groupSelected != null)
-        {
-            DefaultMutableTreeNode currGroup = new DefaultMutableTreeNode(groupSelected);
-            UserGroup newGroup = new UserGroup(groupID.getText());
-            
-            AddGroup(currGroup, newGroup);
-            listGroup.put(newGroup.getID(), newGroup);
-            
-            groupCount++;
-            System.out.println("Group HashMap: " + listGroup.toString());
-        }*/
     }//GEN-LAST:event_addGroupMouseClicked
 
     //When User is selected and Open USER VIEW
