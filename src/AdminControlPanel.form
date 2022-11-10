@@ -125,21 +125,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Show User Total"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="showUserTotalMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="showMessageTotal">
       <Properties>
         <Property name="text" type="java.lang.String" value="Show Messages Total"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="showMessageTotalMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="showGroupTotal">
       <Properties>
         <Property name="text" type="java.lang.String" value="Show Group Total"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="showGroupTotalMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="showPosPercent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Show Positive Percentage"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="showPosPercentMouseEntered"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <Properties>

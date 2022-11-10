@@ -9,6 +9,8 @@
  */
 
 import java.util.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
@@ -54,8 +56,8 @@ public class AdminControlPanel extends javax.swing.JFrame
     private String addUserText;
     private UserGroup groupSelected;
     
-    private int userCount = 0;
-    private int groupCount = 0;
+    private UserCount userTotal = new UserCount();
+    private GroupCount groupTotal = new GroupCount();
     
     private void LoadTree()
     {
@@ -127,12 +129,32 @@ public class AdminControlPanel extends javax.swing.JFrame
         });
 
         showUserTotal.setText("Show User Total");
+        showUserTotal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showUserTotalMouseClicked(evt);
+            }
+        });
 
         showMessageTotal.setText("Show Messages Total");
+        showMessageTotal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showMessageTotalMouseClicked(evt);
+            }
+        });
 
         showGroupTotal.setText("Show Group Total");
+        showGroupTotal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showGroupTotalMouseClicked(evt);
+            }
+        });
 
         showPosPercent.setText("Show Positive Percentage");
+        showPosPercent.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                showPosPercentMouseEntered(evt);
+            }
+        });
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -263,7 +285,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             currNode.add(newNode);
             groupSelected.addUserToGroup(newUser);
             listUser.put(newUser.getID(), newUser);
-            userCount++;
+            userTotal.visitUser(newUser);
             
             DefaultTreeModel model = (DefaultTreeModel) rootTree.getModel();
             
@@ -289,7 +311,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             
             currNode.add(newNode);
             listGroup.put(newGroup.getID(), newGroup);
-            groupCount++;
+            groupTotal.visitGroup(newGroup);
             
             DefaultTreeModel model = (DefaultTreeModel) rootTree.getModel();
             
@@ -312,6 +334,42 @@ public class AdminControlPanel extends javax.swing.JFrame
         }
         
     }//GEN-LAST:event_openUserViewMouseClicked
+
+    //Show user total popup when clicked
+    private void showUserTotalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showUserTotalMouseClicked
+        
+        // TODO add your handling code here:
+        JFrame frame = new JFrame();
+        
+        JOptionPane.showMessageDialog(frame, "Total Users: " + userTotal.getTotalUser());
+        
+    }//GEN-LAST:event_showUserTotalMouseClicked
+
+    //Show group total popup when clicked
+    private void showGroupTotalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showGroupTotalMouseClicked
+        
+        // TODO add your handling code here:
+        JFrame frame = new JFrame();
+        
+        JOptionPane.showMessageDialog(frame, "Total Groups: " + groupTotal.getTotalGroup());
+        
+    }//GEN-LAST:event_showGroupTotalMouseClicked
+
+    //Show message total popup when clicked
+    private void showMessageTotalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showMessageTotalMouseClicked
+        
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_showMessageTotalMouseClicked
+
+    //Show positive message percentage pop when clicked
+    private void showPosPercentMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPosPercentMouseEntered
+        
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_showPosPercentMouseEntered
 
     /**
      * @param args the command line arguments
