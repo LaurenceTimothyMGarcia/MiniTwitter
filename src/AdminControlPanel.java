@@ -268,6 +268,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             
             AddUser(currGroup, newUser);
             groupSelected.addUserToGroup(newUser);
+            
             userCount++;
             //LoadTree();
         }
