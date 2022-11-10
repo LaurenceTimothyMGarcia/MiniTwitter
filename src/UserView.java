@@ -16,7 +16,8 @@ public class UserView extends javax.swing.JFrame {
      * Creates new form UserView
      */
     private User user;
-    private DefaultListModel model = new DefaultListModel();
+    private DefaultListModel followModel = new DefaultListModel();
+    private DefaultListModel tweetModel = new DefaultListModel();
     
     //Initalize User
     public UserView(User user) {
@@ -24,11 +25,12 @@ public class UserView extends javax.swing.JFrame {
         initComponents();
         
         UserName.setText(user.getID());
-        currentFollows.setModel(model);
+        currentFollows.setModel(followModel);
+        newsFeed.setModel(tweetModel);
         
         for (User u : user.getFollowing())
         {
-            model.addElement(u);
+            followModel.addElement(u);
         }
         
         this.setVisible(true);
@@ -79,6 +81,11 @@ public class UserView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tweetMessage);
 
         postTweet.setText("Post Tweet");
+        postTweet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                postTweetMouseClicked(evt);
+            }
+        });
 
         newsFeed.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -168,16 +175,29 @@ public class UserView extends javax.swing.JFrame {
         {
             String userValid = userID.getText();
             
-            if(user.getFollowing().indexOf(userValid) < 0 && !model.contains(userValid))
+            if(user.getFollowing().indexOf(userValid) < 0 && !followModel.contains(userValid))
             {
                 User newUser = new User(userValid);
                 
-                model.addElement(newUser);
+                followModel.addElement(newUser);
                 user.addFollowing(newUser);
             }
         }
         
     }//GEN-LAST:event_followUserMouseClicked
+
+    //Post Tweet Button
+    private void postTweetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postTweetMouseClicked
+        
+        // TODO add your handling code here:
+        if (tweetMessage != null)
+        {
+            String tweet = tweetMessage.getText();
+            
+            user.addMessage(tweet);
+            tweetModel.addElement(user.getID() + ": "+ tweet);
+        }
+    }//GEN-LAST:event_postTweetMouseClicked
 
     /**
      * @param args the command line arguments
