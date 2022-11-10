@@ -45,8 +45,8 @@ public class AdminControlPanel extends javax.swing.JFrame
     
     private DefaultMutableTreeNode rootView;
     
-    private static HashMap<UserGroup, UserGroup> listGroup = new HashMap<UserGroup, UserGroup>();
-    private static HashMap<User, UserGroup> listUser = new HashMap<User, UserGroup>();
+    private static HashMap<String, UserGroup> listGroup = new HashMap<String, UserGroup>();
+    private static HashMap<String, User> listUser = new HashMap<String, User>();
     
     private CompositeUser currentSelected;
     private User userSelected;
@@ -267,9 +267,11 @@ public class AdminControlPanel extends javax.swing.JFrame
             
             AddUser(currGroup, newUser);
             groupSelected.addUserToGroup(newUser);
+            listUser.put(newUser.getID(), newUser);
             
             userCount++;
-            //LoadTree();
+            
+            System.out.println("UserHashMap: " + listUser.toString());
         }
     }//GEN-LAST:event_addUserMouseClicked
 
@@ -285,8 +287,10 @@ public class AdminControlPanel extends javax.swing.JFrame
             UserGroup newGroup = new UserGroup(groupID.getText());
             
             AddGroup(currGroup, newGroup);
+            listGroup.put(newGroup.getID(), newGroup);
+            
             groupCount++;
-            //LoadTree();
+            System.out.println("Group HashMap: " + listGroup.toString());
         }
     }//GEN-LAST:event_addGroupMouseClicked
 
