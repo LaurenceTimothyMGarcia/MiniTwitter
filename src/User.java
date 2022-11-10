@@ -9,11 +9,8 @@ public class User implements CompositeUser
     //Unique user id
     private String userID;
 
-    //List of followers
-    private Set<Integer> followers;
-
     //List of following
-    private Set<Integer> following;
+    private ArrayList<User> following;
     
     private List<String> message;
     private List<Message> newsFeed;
@@ -21,8 +18,7 @@ public class User implements CompositeUser
     public User(String id)
     {
         this.userID = id;
-        this.followers = new HashSet<Integer>();
-        this.following = new HashSet<Integer>();
+        this.following = new ArrayList<User>();
         this.message = new ArrayList<String>();
         this.newsFeed = new ArrayList<Message>();
     }
@@ -40,22 +36,12 @@ public class User implements CompositeUser
         return userID;
     }
 
-    public void addFollower(int userID)
-    {
-        followers.add(userID);
-    }
-
-    public Set<Integer> getFollowers()
-    {
-        return followers;
-    }
-
-    public void addFollowing(int userID)
+    public void addFollowing(User userID)
     {
         following.add(userID);
     }
 
-    public Set<Integer> getFollowing()
+    public ArrayList<User> getFollowing()
     {
         return following;
     }

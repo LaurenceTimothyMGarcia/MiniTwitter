@@ -45,8 +45,8 @@ public class AdminControlPanel extends javax.swing.JFrame
     
     private DefaultMutableTreeNode rootView = new DefaultMutableTreeNode(root);
     
-    private HashMap<UserGroup, UserGroup> listGroup = new HashMap<UserGroup, UserGroup>();
-    private HashMap<User, UserGroup> listUser = new HashMap<User, UserGroup>();
+    private static HashMap<UserGroup, UserGroup> listGroup = new HashMap<UserGroup, UserGroup>();
+    private static HashMap<User, UserGroup> listUser = new HashMap<User, UserGroup>();
     
     private CompositeUser currentSelected;
     private User userSelected;
@@ -129,6 +129,11 @@ public class AdminControlPanel extends javax.swing.JFrame
         });
 
         openUserView.setText("Open User View");
+        openUserView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                openUserViewMouseClicked(evt);
+            }
+        });
 
         showUserTotal.setText("Show User Total");
 
@@ -284,6 +289,20 @@ public class AdminControlPanel extends javax.swing.JFrame
             //LoadTree();
         }
     }//GEN-LAST:event_addGroupMouseClicked
+
+    //When User is selected and Open USER VIEW
+    private void openUserViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openUserViewMouseClicked
+        
+        // TODO add your handling code here:
+        System.out.println("User View Button Pressed");
+        
+        if (userSelected != null)
+        {
+            User user = userSelected;
+            UserView openWindow = new UserView(user);
+        }
+        
+    }//GEN-LAST:event_openUserViewMouseClicked
 
     /**
      * @param args the command line arguments
