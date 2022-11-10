@@ -18,9 +18,7 @@ public class AdminControlPanel extends javax.swing.JFrame
      * Created singleton
      */
     private static AdminControlPanel instance = null;
-    private static ArrayList<User> allUsers = new ArrayList<User>();
-    private static ArrayList<UserGroup> allUserGroups = new ArrayList<UserGroup>();;
-    private static UserGroup root = new UserGroup("Root");
+    private static UserGroup root = null;
     private static DefaultTreeModel tree = null;
     
     public static AdminControlPanel getInstance()
@@ -40,11 +38,16 @@ public class AdminControlPanel extends javax.swing.JFrame
      */
     private AdminControlPanel() 
     {
+        root = new UserGroup("Root");
         initComponents();
         LoadTree();
     }
     
     private DefaultMutableTreeNode rootView = new DefaultMutableTreeNode(root);
+    
+    private HashMap<UserGroup, UserGroup> listGroup = new HashMap<UserGroup, UserGroup>();
+    private HashMap<User, UserGroup> listUser = new HashMap<User, UserGroup>();
+    
     private CompositeUser currentSelected;
     private User userSelected;
     private String addUserText;
@@ -58,12 +61,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         System.out.println("Run");
         System.out.println(root);
         
-        root = new UserGroup("Root");
         //Need to automate the loading of root
-        for (int i = 0; i < allUserGroups.size(); i++)
-        {
-            AddGroup(rootView, allUserGroups.get(i));
-        }
         
         //Adding all groups to tree
         tree = (DefaultTreeModel) rootTree.getModel();
@@ -73,7 +71,11 @@ public class AdminControlPanel extends javax.swing.JFrame
     
     public void AddUser(DefaultMutableTreeNode rootNode, CompositeUser u)
     {
-        rootNode.add(new DefaultMutableTreeNode(u));
+        //rootNode.add(new DefaultMutableTreeNode(u));
+        DefaultMutableTreeNode newUser = new DefaultMutableTreeNode(u);
+        
+        tree.insertNodeInto(newUser, rootNode, 0);
+        rootTree.setModel(tree);
     }
     
     //Adds a user group to the tree
@@ -81,23 +83,10 @@ public class AdminControlPanel extends javax.swing.JFrame
     {
         DefaultMutableTreeNode newGroup = new DefaultMutableTreeNode(group);
         
-        for (int i = 0; i < group.getGroup().size(); i++)
-        {
-            //Checks if its user or user group
-            if (group.getGroup().get(i) instanceof User user)
-            {
-                System.out.println("Got User");
-                AddUser(newGroup, user);
-            }
-            //If user group then recursively call until only users input
-            else if (group.getGroup().get(i) instanceof UserGroup userGroup)
-            {
-                System.out.println("Got User Group");
-                AddGroup(newGroup, userGroup);
-            }
-        }
+        //parNode.add(newGroup);
         
-        parNode.add(newGroup);
+        tree.insertNodeInto(newGroup, parNode, 0);
+        rootTree.setModel(tree);
     }
 
     /**
@@ -274,9 +263,8 @@ public class AdminControlPanel extends javax.swing.JFrame
             
             AddUser(currGroup, newUser);
             groupSelected.addUserToGroup(newUser);
-            allUsers.add(newUser);
             userCount++;
-            LoadTree();
+            //LoadTree();
         }
     }//GEN-LAST:event_addUserMouseClicked
 
@@ -292,9 +280,8 @@ public class AdminControlPanel extends javax.swing.JFrame
             UserGroup newGroup = new UserGroup(groupID.getText());
             
             AddGroup(currGroup, newGroup);
-            allUserGroups.add(newGroup);
             groupCount++;
-            LoadTree();
+            //LoadTree();
         }
     }//GEN-LAST:event_addGroupMouseClicked
 
