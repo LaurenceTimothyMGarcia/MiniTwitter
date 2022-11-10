@@ -54,11 +54,12 @@ public class AdminControlPanel extends javax.swing.JFrame
     private AdminControlPanel() 
     {
         initComponents();
+        LoadTree();
     }
     
-    private static DefaultMutableTreeNode rootView = new DefaultMutableTreeNode(root);
+    private DefaultMutableTreeNode rootView = new DefaultMutableTreeNode(root);
     
-    public void LoadTree()
+    private void LoadTree()
     {
         System.out.println("Run");
         
@@ -76,20 +77,20 @@ public class AdminControlPanel extends javax.swing.JFrame
         AddGroup(rootView, study);
         
         //Adding all groups to tree
-        tree = (DefaultTreeModel) jTree1.getModel();
+        tree = (DefaultTreeModel) rootTree.getModel();
         tree.setRoot(rootView);
-        jTree1.setModel(tree);
+        rootTree.setModel(tree);
     }
     
     public void AddUser(DefaultMutableTreeNode rootNode, CompositeUser u)
     {
-        rootNode.add(new DefaultMutableTreeNode(u));
+        rootNode.add(new DefaultMutableTreeNode(u.getID()));
     }
     
     //Adds a user group to the tree
     public void AddGroup(DefaultMutableTreeNode parNode, UserGroup group)
     {
-        DefaultMutableTreeNode newGroup = new DefaultMutableTreeNode(group);
+        DefaultMutableTreeNode newGroup = new DefaultMutableTreeNode(group.getID());
         
         for (int i = 0; i < group.getGroup().size(); i++)
         {
@@ -131,7 +132,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         jScrollPane3 = new javax.swing.JScrollPane();
         groupID = new javax.swing.JTextArea();
         TreeView = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        rootTree = new javax.swing.JTree();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -166,8 +167,8 @@ public class AdminControlPanel extends javax.swing.JFrame
         jScrollPane3.setViewportView(groupID);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        TreeView.setViewportView(jTree1);
+        rootTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        TreeView.setViewportView(rootTree);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,8 +274,8 @@ public class AdminControlPanel extends javax.swing.JFrame
     private javax.swing.JTextArea groupID;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTree jTree1;
     private javax.swing.JButton openUserView;
+    private javax.swing.JTree rootTree;
     private javax.swing.JButton showGroupTotal;
     private javax.swing.JButton showMessageTotal;
     private javax.swing.JButton showPosPercent;
