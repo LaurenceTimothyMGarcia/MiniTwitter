@@ -14,14 +14,14 @@ public class User implements CompositeUser
     
     //User messages
     private List<String> message;
-    private List<Message> newsFeed;
+    private Message newsFeed;
     
     public User(String id)
     {
         this.userID = id;
         this.following = new ArrayList<User>();
         this.message = new ArrayList<String>();
-        this.newsFeed = new ArrayList<Message>();
+        this.newsFeed = new Message();
     }
 
     //Accessor methods
@@ -57,6 +57,11 @@ public class User implements CompositeUser
     public String getMessage(int pos)
     {
         return message.get(pos);
+    }
+    
+    public void update()
+    {
+        //newsFeed.printTweets(newsFeed, following, this);
     }
     
     //Used to allow method to read name
