@@ -58,6 +58,8 @@ public class AdminControlPanel extends javax.swing.JFrame
     
     private UserCount userTotal = new UserCount();
     private GroupCount groupTotal = new GroupCount();
+    private MessageCount messageTotal = new MessageCount();
+    private PosMessageCount posPercentage = new PosMessageCount();
     
     private void LoadTree()
     {
@@ -359,7 +361,9 @@ public class AdminControlPanel extends javax.swing.JFrame
     private void showMessageTotalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showMessageTotalMouseClicked
         
         // TODO add your handling code here:
+        JFrame frame = new JFrame();
         
+        JOptionPane.showMessageDialog(frame, "Total Messages: " + messageTotal.getTotalMessage());
         
     }//GEN-LAST:event_showMessageTotalMouseClicked
 
@@ -367,7 +371,11 @@ public class AdminControlPanel extends javax.swing.JFrame
     private void showPosPercentMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPosPercentMouseEntered
         
         // TODO add your handling code here:
+        JFrame frame = new JFrame();
         
+        posPercentage.visitUser(userSelected);
+        
+        JOptionPane.showMessageDialog(frame, "Positive Message Percentage: " + posPercentage.getPosMessage());
         
     }//GEN-LAST:event_showPosPercentMouseEntered
 
