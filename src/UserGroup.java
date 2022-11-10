@@ -39,4 +39,10 @@ public class UserGroup implements CompositeUser
     {
         return groupUsers;
     }
+    
+    @Override
+    public String toString()
+    {
+        return groupID;
+    }
 }

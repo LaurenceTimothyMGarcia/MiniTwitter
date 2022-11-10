@@ -69,4 +69,10 @@ public class User implements CompositeUser
     {
         return message.get(pos);
     }
+    
+    @Override
+    public String toString()
+    {
+        return userID;
+    }
 }
