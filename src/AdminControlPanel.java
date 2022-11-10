@@ -43,7 +43,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         LoadTree();
     }
     
-    private DefaultMutableTreeNode rootView = new DefaultMutableTreeNode(root);
+    private DefaultMutableTreeNode rootView;
     
     private static HashMap<UserGroup, UserGroup> listGroup = new HashMap<UserGroup, UserGroup>();
     private static HashMap<User, UserGroup> listUser = new HashMap<User, UserGroup>();
@@ -59,9 +59,9 @@ public class AdminControlPanel extends javax.swing.JFrame
     private void LoadTree()
     {
         System.out.println("Run");
-        System.out.println(root);
         
         //Need to automate the loading of root
+        rootView = new DefaultMutableTreeNode(root);
         
         //Adding all groups to tree
         tree = (DefaultTreeModel) rootTree.getModel();
@@ -75,7 +75,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         DefaultMutableTreeNode newUser = new DefaultMutableTreeNode(u);
         
         tree.insertNodeInto(newUser, rootNode, 0);
-        rootTree.setModel(tree);
+        tree.reload(rootView);
     }
     
     //Adds a user group to the tree
@@ -86,7 +86,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         //parNode.add(newGroup);
         
         tree.insertNodeInto(newGroup, parNode, 0);
-        rootTree.setModel(tree);
+        //rootTree.setModel(tree);
     }
 
     /**
@@ -259,10 +259,9 @@ public class AdminControlPanel extends javax.swing.JFrame
     private void addUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserMouseClicked
 
         // TODO add your handling code here:
-        System.out.println("Add User Button Pressed");
-        
         if (groupSelected != null)
         {
+            System.out.println("Add User Button Pressed");
             DefaultMutableTreeNode currGroup = new DefaultMutableTreeNode(groupSelected);
             User newUser = new User(userID.getText());
             
