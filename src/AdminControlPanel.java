@@ -11,6 +11,7 @@
 import java.util.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
 
 public class AdminControlPanel extends javax.swing.JFrame 
 {
@@ -69,24 +70,14 @@ public class AdminControlPanel extends javax.swing.JFrame
         rootTree.setModel(tree);
     }
     
-    public void AddUser(DefaultMutableTreeNode rootNode, CompositeUser u)
+    public static User getUser(String name)
     {
-        //rootNode.add(new DefaultMutableTreeNode(u));
-        DefaultMutableTreeNode newUser = new DefaultMutableTreeNode(u);
-        
-        tree.insertNodeInto(newUser, rootNode, 0);
-        tree.reload(rootView);
+        return listUser.get(name);
     }
     
-    //Adds a user group to the tree
-    public void AddGroup(DefaultMutableTreeNode parNode, UserGroup group)
+    public static boolean userExist(String name)
     {
-        DefaultMutableTreeNode newGroup = new DefaultMutableTreeNode(group);
-        
-        //parNode.add(newGroup);
-        
-        tree.insertNodeInto(newGroup, parNode, 0);
-        //rootTree.setModel(tree);
+        return listUser.containsKey(name);
     }
 
     /**
@@ -259,19 +250,24 @@ public class AdminControlPanel extends javax.swing.JFrame
     private void addUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserMouseClicked
 
         // TODO add your handling code here:
-        if (groupSelected != null)
+        TreeSelectionModel smd = rootTree.getSelectionModel();
+        
+        if (smd.getSelectionCount() > 0 && groupSelected != null)
         {
             System.out.println("Add User Button Pressed");
-            DefaultMutableTreeNode currGroup = new DefaultMutableTreeNode(groupSelected);
             User newUser = new User(userID.getText());
             
-            AddUser(currGroup, newUser);
+            DefaultMutableTreeNode currNode = (DefaultMutableTreeNode) rootTree.getSelectionPath().getLastPathComponent();
+            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(newUser);
+            
+            currNode.add(newNode);
             groupSelected.addUserToGroup(newUser);
             listUser.put(newUser.getID(), newUser);
-            
             userCount++;
             
-            System.out.println("UserHashMap: " + listUser.toString());
+            DefaultTreeModel model = (DefaultTreeModel) rootTree.getModel();
+            
+            model.reload();
         }
     }//GEN-LAST:event_addUserMouseClicked
 
@@ -279,7 +275,28 @@ public class AdminControlPanel extends javax.swing.JFrame
     private void addGroupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addGroupMouseClicked
         
         // TODO add your handling code here:
-        System.out.println("Add Group Button Pressed");
+        TreeSelectionModel smd = rootTree.getSelectionModel();
+        
+        if (smd.getSelectionCount() > 0 && groupSelected != null)
+        {
+            System.out.println("Add Group Button Pressed");
+            UserGroup newGroup = new UserGroup(groupID.getText());
+            
+            DefaultMutableTreeNode currNode = (DefaultMutableTreeNode) rootTree.getSelectionPath().getLastPathComponent();
+            DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(groupID);
+            
+            currNode.add(newNode);
+            listGroup.put(newGroup.getID(), newGroup);
+            groupCount++;
+            
+            DefaultTreeModel model = (DefaultTreeModel) rootTree.getModel();
+            
+            model.reload();
+            
+            System.out.println("Group HashMap: " + listGroup.toString());
+        }
+        
+        /*System.out.println("Add Group Button Pressed");
         
         if (groupSelected != null)
         {
@@ -291,7 +308,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             
             groupCount++;
             System.out.println("Group HashMap: " + listGroup.toString());
-        }
+        }*/
     }//GEN-LAST:event_addGroupMouseClicked
 
     //When User is selected and Open USER VIEW

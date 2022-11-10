@@ -175,9 +175,9 @@ public class UserView extends javax.swing.JFrame {
         {
             String userValid = userID.getText();
             
-            if(user.getFollowing().indexOf(userValid) < 0 && !followModel.contains(userValid))
+            if(user.getFollowing().indexOf(userValid) < 0 && AdminControlPanel.userExist(userValid))
             {
-                User newUser = new User(userValid);
+                User newUser = AdminControlPanel.getUser(userValid);
                 
                 followModel.addElement(newUser);
                 user.addFollowing(newUser);
