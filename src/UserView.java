@@ -26,8 +26,6 @@ public class UserView extends javax.swing.JFrame {
         UserName.setText(user.getID());
         currentFollows.setModel(model);
         
-        model.addElement("Currently Following");
-        
         for (User u : user.getFollowing())
         {
             model.addElement(u);
@@ -172,7 +170,10 @@ public class UserView extends javax.swing.JFrame {
             
             if(user.getFollowing().indexOf(userValid) < 0 && !model.contains(userValid))
             {
-                model.addElement(new User(userValid));
+                User newUser = new User(userValid);
+                
+                model.addElement(newUser);
+                user.addFollowing(newUser);
             }
         }
         
