@@ -1,5 +1,4 @@
-//each group must have unique id, contain any # of users, groups can hold other groups
-//Make this composite
+//Composite Pattern - holds user and groups
 
 import java.util.*;
 
@@ -24,17 +23,19 @@ public class UserGroup implements CompositeUser
         groupID = id;
     }
 
-    @Override 
+    @Override //Get Group ID
     public String getID()
     {
         return groupID;
     }
 
+    //Adds user to a group
     public void addUserToGroup(User userID)
     {
         groupUsers.add(userID);
     }
 
+    //Returns the users in a group
     public ArrayList<CompositeUser> getGroup()
     {
         return groupUsers;

@@ -1,14 +1,9 @@
 
 import javax.swing.DefaultListModel;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
 /**
  *
- * Observer Pattern
+ * Observer Pattern updating news feed
  */
 public class UserView extends javax.swing.JFrame {
 

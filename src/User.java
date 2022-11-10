@@ -12,6 +12,7 @@ public class User implements CompositeUser
     //List of following
     private ArrayList<User> following;
     
+    //User messages
     private List<String> message;
     private List<Message> newsFeed;
     
@@ -36,11 +37,13 @@ public class User implements CompositeUser
         return userID;
     }
 
+    //Adds followers to list
     public void addFollowing(User userID)
     {
         following.add(userID);
     }
 
+    //Gets list of followers
     public ArrayList<User> getFollowing()
     {
         return following;

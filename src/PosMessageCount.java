@@ -16,6 +16,7 @@ public class PosMessageCount implements VisitorInterface
     @Override
     public void visitUser(User user)
     {
+        //Calculates positive messages
         posMessage = messageTracker.CalculatePosWord();
     }
     

@@ -3,23 +3,21 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
  *
- * @author Laurence
+ * Observer pattern to update message and news feed
  */
 public class Message 
 {
+    //Words that are positive
     private String[] positiveWords = {"happy", "positive", "cute", "good", "great", "excellent"};
     
+    //Tweets and the users who tweeted them at that time
     private static ArrayList<String> allTweets = new ArrayList<String>();
     private static ArrayList<User> userTweet = new ArrayList<User>();
     private MessageCount totalMessage = new MessageCount();
     
+    //Calculates how positive a tweet is
     public float CalculatePosWord()
     {
         float percentPos;
@@ -46,6 +44,7 @@ public class Message
         return percentPos;
     }
     
+    //Adds a tweet to both arraylists
     public void addTweet(User user, String tweet)
     {
         allTweets.add(tweet);
@@ -62,6 +61,8 @@ public class Message
         return allTweets;
     }
     
+    //Print out the tweets to the news feed
+    //Checks if user is following them
     public void printTweets(JList newsFeed, ArrayList<User> following, User user)
     {
         DefaultListModel feed = (DefaultListModel) newsFeed.getModel();
