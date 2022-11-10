@@ -18,6 +18,7 @@ public class Message
     
     private static ArrayList<String> allTweets = new ArrayList<String>();
     private static ArrayList<User> userTweet = new ArrayList<User>();
+    private MessageCount totalMessage = new MessageCount();
     
     public float CalculatePosWord()
     {
@@ -29,7 +30,7 @@ public class Message
         {
             String tweet = allTweets.get(i);
             
-            tweet.toLowerCase();
+            tweet = tweet.toLowerCase();
             
             for(int j = 0; j < positiveWords.length; j++)
             {
@@ -49,6 +50,8 @@ public class Message
     {
         allTweets.add(tweet);
         userTweet.add(user);
+        
+        totalMessage.visitUser(user);
         
         System.out.println("Tweets: " + allTweets.toString());
         System.out.println(userTweet.get(userTweet.size() - 1) + ": " + allTweets.get(allTweets.size() - 1));

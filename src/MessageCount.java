@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MessageCount implements VisitorInterface
 {
     
-    private int totalMessage = 0;
+    private static int totalMessage = 0;
     
     @Override
     public void visitUser(User user)

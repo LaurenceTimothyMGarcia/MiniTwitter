@@ -375,7 +375,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         
         posPercentage.visitUser(userSelected);
         
-        JOptionPane.showMessageDialog(frame, "Positive Message Percentage: " + posPercentage.getPosMessage());
+        JOptionPane.showMessageDialog(frame, "Positive Message Percentage: " + posPercentage.getPosMessage() + "%");
         
     }//GEN-LAST:event_showPosPercentMouseEntered
 

@@ -212,6 +212,7 @@ public class UserView extends javax.swing.JFrame {
             user.addMessage(tweet); //Adds tweet to user's message
             messageTrack.addTweet(user, tweet);
             messageTrack.printTweets(newsFeed, user.getFollowing(), user);
+            
         }
     }//GEN-LAST:event_postTweetMouseClicked
 
