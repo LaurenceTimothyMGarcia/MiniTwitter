@@ -92,6 +92,11 @@ public class UserView extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        newsFeed.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                newsFeedValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(newsFeed);
 
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -198,6 +203,10 @@ public class UserView extends javax.swing.JFrame {
             tweetModel.addElement(user.getID() + ": "+ tweet);
         }
     }//GEN-LAST:event_postTweetMouseClicked
+
+    private void newsFeedValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_newsFeedValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newsFeedValueChanged
 
     /**
      * @param args the command line arguments

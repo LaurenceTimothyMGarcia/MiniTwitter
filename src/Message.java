@@ -14,7 +14,8 @@ public class Message
 {
     private String[] positiveWords = {"happy", "positive", "cute", "good", "great", "excellent"};
     
-    private ArrayList<String> allTweets = new ArrayList<String>();
+    private static ArrayList<String> allTweets = new ArrayList<String>();
+    private static ArrayList<User> userTweet = new ArrayList<User>();
     
     public float CalculatePosWord()
     {
@@ -40,8 +41,25 @@ public class Message
         return percentPos;
     }
     
-    public void addTweet(String tweet)
+    public void addTweet(User user, String tweet)
     {
         allTweets.add(tweet);
+        userTweet.add(user);
+    }
+    
+    public ArrayList<String> getTweets()
+    {
+        return allTweets;
+    }
+    
+    public void printTweets(ArrayList<User> following)
+    {
+        for (int i = 0; i < allTweets.size(); i++)
+        {
+            if (following.contains(userTweet.get(i)))
+            {
+                
+            }
+        }
     }
 }
