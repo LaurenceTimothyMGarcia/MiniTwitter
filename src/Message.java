@@ -68,7 +68,7 @@ public class Message
         DefaultListModel feed = (DefaultListModel) newsFeed.getModel();
         feed.clear();
         
-        for (int i = 0; i < allTweets.size(); i++)
+        for (int i = allTweets.size() - 1; i >= 0; i--)
         {
             if (following.contains(userTweet.get(i)) || user.equals(userTweet.get(i)))
             {
