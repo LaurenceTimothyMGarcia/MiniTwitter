@@ -88,13 +88,13 @@ public class AdminControlPanel extends javax.swing.JFrame
     
     public void AddUser(DefaultMutableTreeNode rootNode, CompositeUser u)
     {
-        rootNode.add(new DefaultMutableTreeNode(u.getID()));
+        rootNode.add(new DefaultMutableTreeNode(u));
     }
     
     //Adds a user group to the tree
     public void AddGroup(DefaultMutableTreeNode parNode, UserGroup group)
     {
-        DefaultMutableTreeNode newGroup = new DefaultMutableTreeNode(group.getID());
+        DefaultMutableTreeNode newGroup = new DefaultMutableTreeNode(group);
         
         for (int i = 0; i < group.getGroup().size(); i++)
         {
@@ -249,20 +249,23 @@ public class AdminControlPanel extends javax.swing.JFrame
     private void rootTreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rootTreeMouseClicked
         
         // TODO add your handling code here:
+        System.out.println("Clicked on Tree");
         
         //Getting last value you clicked
         rootView = (DefaultMutableTreeNode) rootTree.getSelectionPath().getLastPathComponent();
-        currentSelected = (CompositeUser) rootView.getUserObject();
+        currentSelected = (CompositeUser) rootView.getUserObject(); //This goes from string to composite user, this isnt possible
         
         //Selects an option, if user is selected, userview can be viewed
         //if group is selected, any user/group added will be under that group.
         if (currentSelected instanceof User user)
         {
+            System.out.println("User Selected");
             userSelected = user;
             groupSelected = null;
         }
         else if (currentSelected instanceof UserGroup group)
         {
+            System.out.println("Group Selected");
             userSelected = null;
             groupSelected = group;
         }
@@ -272,10 +275,11 @@ public class AdminControlPanel extends javax.swing.JFrame
     private void addUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserMouseClicked
 
         // TODO add your handling code here:
+        System.out.println("Add User Button Pressed");
         
         if (groupSelected != null && userID != null)
         {
-            AddUser(rootView, new User(addUserText));
+            AddUser(rootView, new User(userID.getText()));
         }
     }//GEN-LAST:event_addUserMouseClicked
 
