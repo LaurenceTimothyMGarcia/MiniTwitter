@@ -18,6 +18,7 @@ public class UserView extends javax.swing.JFrame {
     private User user;
     private DefaultListModel followModel = new DefaultListModel();
     private DefaultListModel tweetModel = new DefaultListModel();
+    private Message messageTrack = new Message();
     
     //Initalize User
     public UserView(User user) {
@@ -91,11 +92,6 @@ public class UserView extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
-        });
-        newsFeed.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                newsFeedValueChanged(evt);
-            }
         });
         jScrollPane3.setViewportView(newsFeed);
 
@@ -199,14 +195,11 @@ public class UserView extends javax.swing.JFrame {
         {
             String tweet = tweetMessage.getText();
             
-            user.addMessage(tweet);
-            tweetModel.addElement(user.getID() + ": "+ tweet);
+            user.addMessage(tweet); //Adds tweet to user's message
+            messageTrack.addTweet(user, tweet);
+            messageTrack.printTweets(newsFeed, user.getFollowing(), user);
         }
     }//GEN-LAST:event_postTweetMouseClicked
-
-    private void newsFeedValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_newsFeedValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_newsFeedValueChanged
 
     /**
      * @param args the command line arguments

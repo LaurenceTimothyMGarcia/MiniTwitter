@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -45,6 +47,9 @@ public class Message
     {
         allTweets.add(tweet);
         userTweet.add(user);
+        
+        System.out.println("Tweets: " + allTweets.toString());
+        System.out.println(userTweet.get(userTweet.size() - 1) + ": " + allTweets.get(allTweets.size() - 1));
     }
     
     public ArrayList<String> getTweets()
@@ -52,13 +57,16 @@ public class Message
         return allTweets;
     }
     
-    public void printTweets(ArrayList<User> following)
+    public void printTweets(JList newsFeed, ArrayList<User> following, User user)
     {
+        DefaultListModel feed = (DefaultListModel) newsFeed.getModel();
+        feed.clear();
+        
         for (int i = 0; i < allTweets.size(); i++)
         {
-            if (following.contains(userTweet.get(i)))
+            if (following.contains(userTweet.get(i)) || user.equals(userTweet.get(i)))
             {
-                
+                feed.addElement(userTweet.get(i) + ": " + allTweets.get(i));
             }
         }
     }
