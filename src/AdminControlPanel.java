@@ -58,6 +58,10 @@ public class AdminControlPanel extends javax.swing.JFrame
     }
     
     private DefaultMutableTreeNode rootView = new DefaultMutableTreeNode(root);
+    private CompositeUser currentSelected;
+    private User userSelected;
+    private String addUserText;
+    private UserGroup groupSelected;
     
     private void LoadTree()
     {
@@ -137,6 +141,11 @@ public class AdminControlPanel extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         addUser.setText("Add User");
+        addUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addUserMouseClicked(evt);
+            }
+        });
 
         addGroup.setText("Add Group");
 
@@ -168,6 +177,11 @@ public class AdminControlPanel extends javax.swing.JFrame
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
         rootTree.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        rootTree.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rootTreeMouseClicked(evt);
+            }
+        });
         TreeView.setViewportView(rootTree);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -230,6 +244,40 @@ public class AdminControlPanel extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    //This method should set up if the user clicks on the group it is current group
+    private void rootTreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rootTreeMouseClicked
+        
+        // TODO add your handling code here:
+        
+        //Getting last value you clicked
+        rootView = (DefaultMutableTreeNode) rootTree.getSelectionPath().getLastPathComponent();
+        currentSelected = (CompositeUser) rootView.getUserObject();
+        
+        //Selects an option, if user is selected, userview can be viewed
+        //if group is selected, any user/group added will be under that group.
+        if (currentSelected instanceof User user)
+        {
+            userSelected = user;
+            groupSelected = null;
+        }
+        else if (currentSelected instanceof UserGroup group)
+        {
+            userSelected = null;
+            groupSelected = group;
+        }
+    }//GEN-LAST:event_rootTreeMouseClicked
+
+    //If add user from text area if button is pressed
+    private void addUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserMouseClicked
+
+        // TODO add your handling code here:
+        
+        if (groupSelected != null && userID != null)
+        {
+            AddUser(rootView, new User(addUserText));
+        }
+    }//GEN-LAST:event_addUserMouseClicked
 
     /**
      * @param args the command line arguments
