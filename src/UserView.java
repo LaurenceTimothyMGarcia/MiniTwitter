@@ -1,5 +1,6 @@
 
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
@@ -23,6 +24,7 @@ public class UserView extends javax.swing.JFrame {
         UserName.setText(user.getID());
         currentFollows.setModel(followModel);
         newsFeed.setModel(tweetModel);
+        this.user.setFeed(newsFeed);
         
         for (User u : user.getFollowing())
         {
@@ -30,6 +32,11 @@ public class UserView extends javax.swing.JFrame {
         }
         
         this.setVisible(true);
+    }
+    
+    public JList feed()
+    {
+        return newsFeed;
     }
 
     /**
@@ -191,6 +198,7 @@ public class UserView extends javax.swing.JFrame {
                 
                 followModel.addElement(newUser);
                 user.addFollowing(newUser);
+                newUser.addFollower(user);
             }
         }
         
@@ -205,8 +213,11 @@ public class UserView extends javax.swing.JFrame {
             String tweet = tweetMessage.getText();
             
             user.addMessage(tweet); //Adds tweet to user's message
-            messageTrack.addTweet(user, tweet);
-            messageTrack.printTweets(newsFeed, user.getFollowing(), user);
+            messageTrack.addTweet(user, tweet); //User tweet array
+            messageTrack.printTweets(newsFeed, user.getFollowing(), user);  //Update current user
+            
+            //Ideally updates the followers of the user
+            user.updateFollowers();
             
         }
     }//GEN-LAST:event_postTweetMouseClicked
@@ -249,7 +260,7 @@ public class UserView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserView(new User("Larry")).setVisible(true);
+                //new UserView(new User("Larry")).setVisible(true);
             }
         });
     }

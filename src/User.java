@@ -3,6 +3,7 @@
 //Visitor Pattern
 
 import java.util.*;
+import javax.swing.JList;
 
 public class User implements CompositeUser
 {
@@ -11,15 +12,19 @@ public class User implements CompositeUser
 
     //List of following
     private ArrayList<User> following;
+    private ArrayList<User> followers;
     
     //User messages
     private List<String> message;
     private Message newsFeed;
     
+    private JList feed;
+    
     public User(String id)
     {
         this.userID = id;
         this.following = new ArrayList<User>();
+        this.followers = new ArrayList<User>();
         this.message = new ArrayList<String>();
         this.newsFeed = new Message();
     }
@@ -48,6 +53,16 @@ public class User implements CompositeUser
     {
         return following;
     }
+    
+    public void addFollower(User userID)
+    {
+        followers.add(userID);
+    }
+    
+    public ArrayList<User> getFollowers()
+    {
+        return followers;
+    }
 
     public void addMessage(String mess)
     {
@@ -59,9 +74,29 @@ public class User implements CompositeUser
         return message.get(pos);
     }
     
-    public void update()
+    //OBSERVER Pattern - USERS ARE UPDATED HERE
+    public void updateFollowers()
     {
-        //newsFeed.printTweets(newsFeed, following, this);
+        for (int i = 0; i < followers.size(); i++)
+        {
+            followers.get(i).updateFeed(followers.get(i).getFeed());
+        }
+    }
+    
+    public void updateFeed(JList feed)
+    {
+        this.newsFeed.printTweets(feed, following, this);
+    }
+    
+    //OBSERVER PATTERN
+    public void setFeed(JList news)
+    {
+        feed = news;
+    }
+    
+    public JList getFeed()
+    {
+        return this.feed;
     }
     
     //Used to allow method to read name
