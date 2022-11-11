@@ -6,6 +6,7 @@ import javax.swing.JList;
 /**
  *
  * Observer pattern to update message and news feed
+ * 
  */
 public class Message 
 {

@@ -1,6 +1,6 @@
 //Users must have unique ID, list of followers, list of followings
 //news feed list containing list of twitter messsges
-//Visitor Pattern
+//Observer Pattern also implemented in here
 
 import java.util.*;
 import javax.swing.JList;

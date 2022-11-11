@@ -34,6 +34,7 @@ public class UserView extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
+    //Returns feed
     public JList feed()
     {
         return newsFeed;
