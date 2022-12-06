@@ -32,8 +32,9 @@ public class UserView extends javax.swing.JFrame {
         }
         
         //New Features
-        timeCreated.setText(user.getTimeCreated());
-        lastUpdated.setText(user.getLastTimeUpdated());
+        //Assignment 3 #2 #3
+        timeCreated.setText(Long.toString(user.getTimeCreated()));
+        lastUpdated.setText(Long.toString(user.getLastTimeUpdated()));
         
         this.setVisible(true);
     }
@@ -222,7 +223,7 @@ public class UserView extends javax.swing.JFrame {
             
             //Update last time updated
             user.setLastTimeUpdated(System.currentTimeMillis());
-            lastUpdated.setText(user.getLastTimeUpdated());
+            lastUpdated.setText(Long.toString(user.getLastTimeUpdated()));
         }
     }//GEN-LAST:event_postTweetMouseClicked
 

@@ -9,10 +9,11 @@
  */
 import java.util.*;
 
+//Assignment 3 #1
 public class ValidUserCheck implements VisitorInterface
 {
     
-    private Set<User> invalidUser;
+    private Set<CompositeUser> invalidUser = new HashSet<CompositeUser>();
     
     public void visitUser(User user)
     {
@@ -21,18 +22,12 @@ public class ValidUserCheck implements VisitorInterface
     
     public void visitGroup(UserGroup group)
     {
-        //Do nothing here
+        invalidUser.add(group);
     }
     
     public String getListOfUsers()
     {
-        String userList = "";
-        
-        Iterator value = invalidUser.iterator();
-        while (value.hasNext())
-        {
-            userList += (", " + value.next().toString());
-        }
+        String userList = invalidUser.toString();
         
         return userList;
     }

@@ -10,10 +10,14 @@ public class UserGroup implements CompositeUser
     //Holds group of users
     private ArrayList<CompositeUser> groupUsers;
     
-    public UserGroup(String id)
+    //Assignment 3 #2
+    private long timeCreated;
+    
+    public UserGroup(String id, long timeCreate)
     {
         groupID = id;
         groupUsers = new ArrayList<CompositeUser>();
+        this.timeCreated = timeCreate;
     }
     
     //Accessor Methods
@@ -39,6 +43,12 @@ public class UserGroup implements CompositeUser
     public ArrayList<CompositeUser> getGroup()
     {
         return groupUsers;
+    }
+    
+    //Assignment 3
+    public long getTimeCreated()
+    {
+        return timeCreated;
     }
     
     //Used to allow method to read

@@ -37,7 +37,7 @@ public class AdminControlPanel extends javax.swing.JFrame
      */
     private AdminControlPanel() 
     {
-        root = new UserGroup("Root");
+        root = new UserGroup("Root", System.currentTimeMillis());
         initComponents();
         LoadTree();
     }
@@ -56,6 +56,8 @@ public class AdminControlPanel extends javax.swing.JFrame
     private GroupCount groupTotal = new GroupCount();
     private MessageCount messageTotal = new MessageCount();
     private PosMessageCount posPercentage = new PosMessageCount();
+    
+    //Assignment 3 #1 & 4
     private ValidUserCheck invalidUser = new ValidUserCheck();
     private MostRecentUser recentUser = new MostRecentUser();
     
@@ -307,16 +309,17 @@ public class AdminControlPanel extends javax.swing.JFrame
             DefaultMutableTreeNode currNode = (DefaultMutableTreeNode) rootTree.getSelectionPath().getLastPathComponent();
             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(newUser);
             
+            //Assignment 3 #1
+            //Check for listUser to see if user already exist
+            if (listUser.containsKey(newUser.getID()))
+            {
+                invalidUser.visitUser(newUser);
+            }
+            
             currNode.add(newNode);
             groupSelected.addUserToGroup(newUser);
             listUser.put(newUser.getID(), newUser);
             userTotal.visitUser(newUser);
-            
-            //Check for listUser to see if user already exist
-            if (listUser.containsKey(newUser))
-            {
-                invalidUser.visitUser(newUser);
-            }
             
             DefaultTreeModel model = (DefaultTreeModel) rootTree.getModel();
             
@@ -335,10 +338,16 @@ public class AdminControlPanel extends javax.swing.JFrame
         if (smd.getSelectionCount() > 0 && groupSelected != null)
         {
             System.out.println("Add Group Button Pressed");
-            UserGroup newGroup = new UserGroup(groupID.getText());
+            UserGroup newGroup = new UserGroup(groupID.getText(), System.currentTimeMillis());
             
             DefaultMutableTreeNode currNode = (DefaultMutableTreeNode) rootTree.getSelectionPath().getLastPathComponent();
             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(newGroup);
+            
+            //Assignment 3 #1
+            if (listGroup.containsKey(newGroup.getID()))
+            {
+                invalidUser.visitGroup(newGroup);
+            }
             
             currNode.add(newNode);
             listGroup.put(newGroup.getID(), newGroup);
@@ -408,15 +417,17 @@ public class AdminControlPanel extends javax.swing.JFrame
         
     }//GEN-LAST:event_showPosPercentMouseEntered
 
+    ////Assignment 3 #1
     //Returns array of which users are duplicates
     private void ValidateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValidateUserActionPerformed
         // TODO add your handling code here:
         
         JFrame frame = new JFrame();
         
-        JOptionPane.showMessageDialog(frame, "Invalid Users: " + invalidUser.toString());
+        JOptionPane.showMessageDialog(frame, "Invalid Users: " + invalidUser.getListOfUsers());
     }//GEN-LAST:event_ValidateUserActionPerformed
 
+    //Assignment 3 #4
     //Returns Most Recent User Action Performed
     private void RecentUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecentUserActionPerformed
         // TODO add your handling code here:
@@ -433,7 +444,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             }
         }
         
-        JOptionPane.showMessageDialog(frame, "Most Recent User: " + recentUser.toString());
+        JOptionPane.showMessageDialog(frame, "Most Recent User: " + recentUser.getRecentUser());
     }//GEN-LAST:event_RecentUserActionPerformed
 
     /**

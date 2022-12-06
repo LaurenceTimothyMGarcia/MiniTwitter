@@ -7,6 +7,8 @@
  *
  * @author Laurence Garcia
  */
+
+//Assignment 3 #4
 public class MostRecentUser implements VisitorInterface
 {
     private User mostRecentUser;

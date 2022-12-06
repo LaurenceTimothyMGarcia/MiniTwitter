@@ -31,6 +31,8 @@ public class User implements CompositeUser
         this.followers = new ArrayList<User>();
         this.message = new ArrayList<String>();
         this.newsFeed = new Message();
+        
+        //Assignment 3 #2 #3
         this.timeCreated = timeCreate;
         this.lastTimeUpdated = timeCreate;
     }
@@ -106,14 +108,14 @@ public class User implements CompositeUser
     }
     
     //Assignment 3 new FEATURES
-    public String getTimeCreated()
+    public long getTimeCreated()
     {
-        return String.valueOf(timeCreated);
+        return timeCreated;
     }
     
-    public String getLastTimeUpdated()
+    public long getLastTimeUpdated()
     {
-        return String.valueOf(lastTimeUpdated);
+        return lastTimeUpdated;
     }
     
     public void setLastTimeUpdated(long newTime)
