@@ -56,6 +56,8 @@ public class AdminControlPanel extends javax.swing.JFrame
     private GroupCount groupTotal = new GroupCount();
     private MessageCount messageTotal = new MessageCount();
     private PosMessageCount posPercentage = new PosMessageCount();
+    private ValidUserCheck invalidUser = new ValidUserCheck();
+    private MostRecentUser recentUser = new MostRecentUser();
     
     private void LoadTree()
     {
@@ -102,6 +104,8 @@ public class AdminControlPanel extends javax.swing.JFrame
         groupID = new javax.swing.JTextArea();
         TreeView = new javax.swing.JScrollPane();
         rootTree = new javax.swing.JTree();
+        ValidateUser = new javax.swing.JButton();
+        RecentUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,6 +183,20 @@ public class AdminControlPanel extends javax.swing.JFrame
         });
         TreeView.setViewportView(rootTree);
 
+        ValidateUser.setText("Validate IDs");
+        ValidateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ValidateUserActionPerformed(evt);
+            }
+        });
+
+        RecentUser.setText("Recent User");
+        RecentUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecentUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,25 +207,30 @@ public class AdminControlPanel extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(openUserView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(addGroup, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                                    .addComponent(addUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(showMessageTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(showPosPercent, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                    .addGap(37, 37, 37)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(addGroup, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                                        .addComponent(addUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(showUserTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(showMessageTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(showGroupTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(showPosPercent, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                                    .addComponent(showGroupTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(ValidateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(37, 37, 37)
+                            .addComponent(RecentUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -215,7 +238,7 @@ public class AdminControlPanel extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TreeView)
+                    .addComponent(TreeView, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addUser, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
@@ -226,14 +249,18 @@ public class AdminControlPanel extends javax.swing.JFrame
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(openUserView, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(showGroupTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(showUserTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(showUserTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(showGroupTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(showPosPercent, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(showMessageTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(showMessageTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(showPosPercent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(ValidateUser, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                            .addComponent(RecentUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -275,7 +302,7 @@ public class AdminControlPanel extends javax.swing.JFrame
         if (smd.getSelectionCount() > 0 && groupSelected != null)
         {
             System.out.println("Add User Button Pressed");
-            User newUser = new User(userID.getText());
+            User newUser = new User(userID.getText(), System.currentTimeMillis());
             
             DefaultMutableTreeNode currNode = (DefaultMutableTreeNode) rootTree.getSelectionPath().getLastPathComponent();
             DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(newUser);
@@ -284,6 +311,12 @@ public class AdminControlPanel extends javax.swing.JFrame
             groupSelected.addUserToGroup(newUser);
             listUser.put(newUser.getID(), newUser);
             userTotal.visitUser(newUser);
+            
+            //Check for listUser to see if user already exist
+            if (listUser.containsKey(newUser))
+            {
+                invalidUser.visitUser(newUser);
+            }
             
             DefaultTreeModel model = (DefaultTreeModel) rootTree.getModel();
             
@@ -375,6 +408,34 @@ public class AdminControlPanel extends javax.swing.JFrame
         
     }//GEN-LAST:event_showPosPercentMouseEntered
 
+    //Returns array of which users are duplicates
+    private void ValidateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ValidateUserActionPerformed
+        // TODO add your handling code here:
+        
+        JFrame frame = new JFrame();
+        
+        JOptionPane.showMessageDialog(frame, "Invalid Users: " + invalidUser.toString());
+    }//GEN-LAST:event_ValidateUserActionPerformed
+
+    //Returns Most Recent User Action Performed
+    private void RecentUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecentUserActionPerformed
+        // TODO add your handling code here:
+        
+        JFrame frame = new JFrame();
+        long recentUserTime = 0;
+        
+        for (Map.Entry<String, User> currUser : listUser.entrySet())
+        {
+            if (currUser.getValue().getLastTimeUpdatedLong() >= recentUserTime)
+            {
+                recentUserTime = currUser.getValue().getLastTimeUpdatedLong();
+                recentUser.visitUser(currUser.getValue());
+            }
+        }
+        
+        JOptionPane.showMessageDialog(frame, "Most Recent User: " + recentUser.toString());
+    }//GEN-LAST:event_RecentUserActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,7 +472,9 @@ public class AdminControlPanel extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton RecentUser;
     private javax.swing.JScrollPane TreeView;
+    private javax.swing.JButton ValidateUser;
     private javax.swing.JButton addGroup;
     private javax.swing.JButton addUser;
     private javax.swing.JTextArea groupID;

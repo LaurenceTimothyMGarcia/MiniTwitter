@@ -20,13 +20,19 @@ public class User implements CompositeUser
     
     private JList feed;
     
-    public User(String id)
+    //Time created and last time updated
+    private long timeCreated;
+    private long lastTimeUpdated;
+    
+    public User(String id, long timeCreate)
     {
         this.userID = id;
         this.following = new ArrayList<User>();
         this.followers = new ArrayList<User>();
         this.message = new ArrayList<String>();
         this.newsFeed = new Message();
+        this.timeCreated = timeCreate;
+        this.lastTimeUpdated = timeCreate;
     }
 
     //Accessor methods
@@ -97,6 +103,27 @@ public class User implements CompositeUser
     public JList getFeed()
     {
         return this.feed;
+    }
+    
+    //Assignment 3 new FEATURES
+    public String getTimeCreated()
+    {
+        return String.valueOf(timeCreated);
+    }
+    
+    public String getLastTimeUpdated()
+    {
+        return String.valueOf(lastTimeUpdated);
+    }
+    
+    public void setLastTimeUpdated(long newTime)
+    {
+        lastTimeUpdated = newTime;
+    }
+    
+    public long getLastTimeUpdatedLong()
+    {
+        return lastTimeUpdated;
     }
     
     //Used to allow method to read name
